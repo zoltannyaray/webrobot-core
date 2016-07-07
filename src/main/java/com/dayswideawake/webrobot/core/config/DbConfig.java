@@ -5,13 +5,15 @@ import java.util.Properties;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
+import org.apache.commons.dbcp2.BasicDataSource;
+import org.apache.commons.dbcp2.BasicDataSourceFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.PropertiesFactoryBean;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -24,46 +26,47 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableJpaRepositories(basePackages = "com.dayswideawake.webrobot.core.repository")
 public class DbConfig {
-    
+
     @Value("${datasource.url}")
     private String dataSourceUrl;
     @Value("${datasource.username}")
     private String dataSourceUsername;
     @Value("${datasource.password}")
     private String dataSourcePassword;
-    
-    @Bean(name = "dataSource")
-    public DataSource getDataSource() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setUrl(dataSourceUrl);
-        dataSource.setUsername(dataSourceUsername);
-        dataSource.setPassword(dataSourcePassword);
-        return dataSource;
+
+    @Bean
+    public PropertiesFactoryBean dataSourceProperties() {
+        PropertiesFactoryBean propertiesFactoryBean = new PropertiesFactoryBean();
+        propertiesFactoryBean.setLocation(new ClassPathResource("/config/datasource.properties"));
+        return propertiesFactoryBean;
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, JpaVendorAdapter jpaVendorAdapter) {
+    public BasicDataSource dataSource( Properties dataSourceProperties) throws Exception {
+        return BasicDataSourceFactory.createDataSource(dataSourceProperties);
+    }
+
+    @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, JpaVendorAdapter jpaVendorAdapter, Properties jpaProperties) {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource);
         entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);
         entityManagerFactoryBean.setPackagesToScan("com.dayswideawake.webrobot.core.entity");
-        entityManagerFactoryBean.setJpaProperties(getJpaProperties());
+        entityManagerFactoryBean.setJpaProperties(jpaProperties);
         return entityManagerFactoryBean;
     }
 
     @Bean
     public JpaVendorAdapter jpaVendorAdapter() {
         HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
-        jpaVendorAdapter.setGenerateDdl(true);
         return jpaVendorAdapter;
     }
 
-    private Properties getJpaProperties() {
-        Properties properties = new Properties();
-        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
-        properties.setProperty("hibernate.id.new_generator_mappings", "false");
-        properties.setProperty("hibernate.hbm2ddl.auto", "create");
-        return properties;
+    @Bean
+    public PropertiesFactoryBean jpaProperties() {
+        PropertiesFactoryBean propertiesFactoryBean = new PropertiesFactoryBean();
+        propertiesFactoryBean.setLocation(new ClassPathResource("/config/jpa.properties"));
+        return propertiesFactoryBean;
     }
 
     @Bean
