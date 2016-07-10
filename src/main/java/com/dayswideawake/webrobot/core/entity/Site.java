@@ -1,5 +1,6 @@
 package com.dayswideawake.webrobot.core.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,7 +13,7 @@ public class Site {
     @GeneratedValue
     private Long id;
     private String name;
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private Location location;
     
     public Site() {
@@ -23,7 +24,6 @@ public class Site {
     }
 
     public Site(String name, Location location) {
-        super();
         this.name = name;
         this.location = location;
     }

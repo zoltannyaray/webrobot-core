@@ -1,5 +1,6 @@
 package com.dayswideawake.webrobot.core.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,9 +12,9 @@ public class LookupDefinition {
     @Id
     @GeneratedValue
     private Long id;
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private Site site;
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL)
     private Selector selector;
     private Long intervalSeconds;
 
@@ -24,6 +25,10 @@ public class LookupDefinition {
         this.site = site;
         this.selector = selector;
         this.intervalSeconds = intervalSeconds;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public Site getSite() {

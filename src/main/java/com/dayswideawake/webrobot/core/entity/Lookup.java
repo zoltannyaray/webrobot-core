@@ -1,7 +1,7 @@
 package com.dayswideawake.webrobot.core.entity;
 
+import java.util.Date;
 import java.util.List;
-
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +14,7 @@ public class Lookup {
     @Id
     @GeneratedValue
     private Long id;
+    private Date createdAt;
     @OneToOne
     private LookupDefinition lookupDefintion;
     @ElementCollection
@@ -22,17 +23,22 @@ public class Lookup {
     public Lookup() {
     }
 
-    public Lookup(LookupDefinition lookupDefintion, List<String> selectedContent) {
+    public Lookup(LookupDefinition lookupDefintion, List<String> selectedContent, Date createdAt) {
         this.lookupDefintion = lookupDefintion;
         this.selectedContent = selectedContent;
+        this.createdAt = createdAt;
     }
 
     public Long getId() {
         return id;
     }
 
-    public LookupDefinition getCheck() {
+    public LookupDefinition getLookupDefintion() {
         return lookupDefintion;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
     public List<String> getSelectedContent() {

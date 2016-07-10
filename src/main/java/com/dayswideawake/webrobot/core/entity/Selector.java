@@ -15,5 +15,4 @@ public abstract class Selector {
     
     public abstract List<String> select(String content);
     
-    
 }
