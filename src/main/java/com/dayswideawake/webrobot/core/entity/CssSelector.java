@@ -10,6 +10,9 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Document.OutputSettings;
 import org.jsoup.select.Elements;
 
+import com.dayswideawake.webrobot.core.service.SelectorStrategy;
+import com.dayswideawake.webrobot.core.service.SelectorStrategyCss;
+
 @Entity
 public class CssSelector extends Selector {
 
@@ -34,6 +37,11 @@ public class CssSelector extends Selector {
         document.outputSettings(outputSettings);
         Elements elements = document.select(cssSelector);
         return elements.stream().map((element) -> element.outerHtml()).collect(Collectors.toList());
+    }
+
+    @Override
+    public Class<? extends SelectorStrategy<?>> getSelectorStrategyClass() {
+        return SelectorStrategyCss.class;
     }
 
 }

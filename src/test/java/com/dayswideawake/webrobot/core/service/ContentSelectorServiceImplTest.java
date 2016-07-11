@@ -17,6 +17,8 @@ public class ContentSelectorServiceImplTest {
   
     private ContentSelectorServiceImpl service;
     @Mock
+    private SelectorStrategyLocator selectorStrategyLocator;
+    @Mock
     private ContentLoaderService contentLoaderService;
     @Mock
     private Site site;
@@ -25,7 +27,8 @@ public class ContentSelectorServiceImplTest {
     public void init(){
         MockitoAnnotations.initMocks(this);
         Mockito.when(contentLoaderService.loadContent(Mockito.any(Site.class))).thenReturn("<html><body><p id=\"id1\">Test</p><p class=\"class1\">Test 2</p></body></html>");
-        service = new ContentSelectorServiceImpl(contentLoaderService);
+        Mockito.when(selectorStrategyLocator.getSelectorStrategyFor(CssSelector.class)).thenReturn(new SelectorStrategyCss());
+        service = new ContentSelectorServiceImpl(contentLoaderService, selectorStrategyLocator);
     }
     
     @Test

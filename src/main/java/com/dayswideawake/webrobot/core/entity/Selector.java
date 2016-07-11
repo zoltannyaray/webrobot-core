@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import com.dayswideawake.webrobot.core.service.SelectorStrategy;
+
 @Entity
 public abstract class Selector {
 
@@ -14,5 +16,7 @@ public abstract class Selector {
     private Long id;
     
     public abstract List<String> select(String content);
+    
+    public abstract Class<? extends SelectorStrategy<?>> getSelectorStrategyClass();
     
 }
