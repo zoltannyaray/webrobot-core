@@ -7,6 +7,6 @@ import com.dayswideawake.webrobot.core.entity.Site;
 
 public interface ContentSelectorService {
 
-    public List<String> selectContent(Site site, Selector selector);
+    public <T extends Selector> List<String> selectContent(Site site, T selector);
     
 }

@@ -12,6 +12,7 @@ import org.testng.annotations.Test;
 
 import com.dayswideawake.webrobot.core.entity.CssSelector;
 import com.dayswideawake.webrobot.core.entity.Site;
+import com.dayswideawake.webrobot.core.entity.XPathSelector;
 
 public class ContentSelectorServiceImplTest {
   
@@ -27,7 +28,8 @@ public class ContentSelectorServiceImplTest {
     public void init(){
         MockitoAnnotations.initMocks(this);
         Mockito.when(contentLoaderService.loadContent(Mockito.any(Site.class))).thenReturn("<html><body><p id=\"id1\">Test</p><p class=\"class1\">Test 2</p></body></html>");
-        Mockito.when(selectorStrategyLocator.getSelectorStrategyFor(CssSelector.class)).thenReturn(new SelectorStrategyCss());
+        Mockito.when(selectorStrategyLocator.getSelectorStrategyFor(Mockito.isA(CssSelector.class))).thenReturn(new SelectorStrategyCss());
+        Mockito.when(selectorStrategyLocator.getSelectorStrategyFor(Mockito.isA(XPathSelector.class))).thenReturn(new SelectorStrategyXPath());
         service = new ContentSelectorServiceImpl(contentLoaderService, selectorStrategyLocator);
     }
     
@@ -59,6 +61,12 @@ public class ContentSelectorServiceImplTest {
     public void selectContentShouldSelectByFollowing(){
         List<String> selectedContent = service.selectContent(site, new CssSelector("#id1 + .class1"));
         Assert.assertEquals(selectedContent, Arrays.asList("<p class=\"class1\">Test 2</p>"));
+    }
+    
+    @Test
+    public void selectContentShouldBeNullOnXPath(){
+        List<String> selectedContent = service.selectContent(site, new XPathSelector());
+        Assert.assertEquals(selectedContent, null);
     }
     
     

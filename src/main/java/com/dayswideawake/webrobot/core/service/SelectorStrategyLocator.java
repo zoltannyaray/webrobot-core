@@ -4,6 +4,6 @@ import com.dayswideawake.webrobot.core.entity.Selector;
 
 public interface SelectorStrategyLocator {
 
-    public <T extends Selector> SelectorStrategy<T> getSelectorStrategyFor(Class<T> selectorClass);
+    public <T extends Selector> SelectorStrategy<T> getSelectorStrategyFor(T selector);
     
 }

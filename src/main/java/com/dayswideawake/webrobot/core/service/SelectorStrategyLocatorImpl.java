@@ -17,7 +17,7 @@ public class SelectorStrategyLocatorImpl implements SelectorStrategyLocator {
     }
 
     @Override
-    public <T extends Selector> SelectorStrategy<T> getSelectorStrategyFor(Class<T> selectorClass) {
+    public <T extends Selector> SelectorStrategy<T> getSelectorStrategyFor(T selector) {
         return applicationContext.getBean(SelectorStrategy.class);
     }
 
