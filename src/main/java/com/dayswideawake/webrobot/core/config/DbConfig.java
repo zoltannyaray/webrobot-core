@@ -30,7 +30,7 @@ public class DbConfig {
 
     @Autowired
     private Environment environment;
-    
+
     @Bean
     public PropertiesFactoryBean dataSourceProperties() {
         PropertiesFactoryBean propertiesFactoryBean = new PropertiesFactoryBean();
@@ -44,8 +44,7 @@ public class DbConfig {
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, JpaVendorAdapter jpaVendorAdapter,
-            Properties jpaProperties) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource, JpaVendorAdapter jpaVendorAdapter, Properties jpaProperties) {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource);
         entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter);

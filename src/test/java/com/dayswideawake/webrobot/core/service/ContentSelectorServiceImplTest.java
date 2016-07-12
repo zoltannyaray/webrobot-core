@@ -1,12 +1,8 @@
 package com.dayswideawake.webrobot.core.service;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -23,51 +19,34 @@ public class ContentSelectorServiceImplTest {
     private ContentLoaderService contentLoaderService;
     @Mock
     private Site site;
+    @Mock
+    private SelectorStrategyCss selectorStrategyCss;
+    @Mock
+    private SelectorStrategyXPath selectorStrategyXPath;
+    private String content = "test content";
     
     @BeforeMethod
     public void init(){
         MockitoAnnotations.initMocks(this);
-        Mockito.when(contentLoaderService.loadContent(Mockito.any(Site.class))).thenReturn("<html><body><p id=\"id1\">Test</p><p class=\"class1\">Test 2</p></body></html>");
-        Mockito.when(selectorStrategyLocator.getSelectorStrategyFor(Mockito.isA(CssSelector.class))).thenReturn(new SelectorStrategyCss());
-        Mockito.when(selectorStrategyLocator.getSelectorStrategyFor(Mockito.isA(XPathSelector.class))).thenReturn(new SelectorStrategyXPath());
+        Mockito.when(contentLoaderService.loadContent(Mockito.any(Site.class))).thenReturn(content);
+        Mockito.when(selectorStrategyLocator.getSelectorStrategyFor(Mockito.isA(CssSelector.class))).thenReturn(selectorStrategyCss);
+        Mockito.when(selectorStrategyLocator.getSelectorStrategyFor(Mockito.isA(XPathSelector.class))).thenReturn(selectorStrategyXPath);
         service = new ContentSelectorServiceImpl(contentLoaderService, selectorStrategyLocator);
     }
     
     @Test
-    public void selectContentShouldSelectBody(){
-        List<String> selectedContent = service.selectContent(site, new CssSelector("body"));
-        Assert.assertEquals(selectedContent, Arrays.asList("<body><p id=\"id1\">Test</p><p class=\"class1\">Test 2</p></body>"));
+    public void selectContentShouldUseCssSelectorStrategy(){
+        CssSelector selector = new CssSelector("test selector");
+        service.selectContent(site, selector);
+        Mockito.verify(selectorStrategyCss, Mockito.times(1)).select(content, selector);
+        Mockito.verify(selectorStrategyXPath, Mockito.never()).select(Mockito.any(), Mockito.any());
     }
     
     @Test
-    public void selectContentShouldSelectMultiplePs(){
-        List<String> selectedContent = service.selectContent(site, new CssSelector("p"));
-        Assert.assertEquals(selectedContent, Arrays.asList("<p id=\"id1\">Test</p>", "<p class=\"class1\">Test 2</p>"));
-    }
-    
-    @Test
-    public void selectContentShouldSelectByClass(){
-        List<String> selectedContent = service.selectContent(site, new CssSelector(".class1"));
-        Assert.assertEquals(selectedContent, Arrays.asList("<p class=\"class1\">Test 2</p>"));
-    }
-    
-    @Test
-    public void selectContentShouldSelectById(){
-        List<String> selectedContent = service.selectContent(site, new CssSelector("#id1"));
-        Assert.assertEquals(selectedContent, Arrays.asList("<p id=\"id1\">Test</p>"));
-    }
-    
-    @Test
-    public void selectContentShouldSelectByFollowing(){
-        List<String> selectedContent = service.selectContent(site, new CssSelector("#id1 + .class1"));
-        Assert.assertEquals(selectedContent, Arrays.asList("<p class=\"class1\">Test 2</p>"));
-    }
-    
-    @Test
-    public void selectContentShouldBeNullOnXPath(){
-        List<String> selectedContent = service.selectContent(site, new XPathSelector());
-        Assert.assertEquals(selectedContent, null);
-    }
-    
-    
+    public void selectContentShouldUseXPathSelectorStrategy(){
+        XPathSelector selector = new XPathSelector("test selector");
+        service.selectContent(site, selector);
+        Mockito.verify(selectorStrategyXPath, Mockito.times(1)).select(content, selector);
+        Mockito.verify(selectorStrategyCss, Mockito.never()).select(Mockito.any(), Mockito.any());
+    }    
 }

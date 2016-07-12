@@ -24,7 +24,6 @@ public class ContentSelectorServiceImpl implements ContentSelectorService {
     public <T extends Selector> List<String> selectContent(Site site, T selector) {
         String content = contentLoaderService.loadContent(site);
         SelectorStrategy<T> selectorStrategy = selectorStrategyLocator.getSelectorStrategyFor(selector);
-        System.out.println(selectorStrategy.getClass().toGenericString());
         return selectorStrategy.select(content, selector);
     }
 
