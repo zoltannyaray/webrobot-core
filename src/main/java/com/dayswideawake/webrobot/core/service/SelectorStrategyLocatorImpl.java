@@ -12,32 +12,18 @@ import com.dayswideawake.webrobot.core.entity.Selector;
 @Service
 public class SelectorStrategyLocatorImpl implements SelectorStrategyLocator {
 
-//    private ApplicationContext applicationContext;
-    
     @Autowired
-    private List<SelectorStrategy<? extends Selector>> selectorStrategies;
-
-//    @Autowired
-//    public SelectorStrategyLocatorImpl(ApplicationContext applicationContext) {
-//        this.applicationContext = applicationContext;
-//    }
+    private List<SelectorStrategy<? extends Selector>> allSelectorStrategies;
 
     @Override
     public <T extends Selector> SelectorStrategy<T> getSelectorStrategyFor(T selector) {
-//        SelectorStrategy<T> strategy = applicationContext.getBean(SelectorStrategy.class);
-        SelectorStrategy<T> strategy = null;
-        ResolvableType expectedType = ResolvableType.forClassWithGenerics(SelectorStrategy.class, selector.getClass());
-        for(SelectorStrategy<? extends Selector> strategyToCheck: selectorStrategies) {
-            if(expectedType.isInstance(strategyToCheck)){
-                strategy = (SelectorStrategy<T>) strategyToCheck;
-            }
-        }
-        if (strategy != null){
-            return strategy;
-        }
-        else {
-            throw new RuntimeException("SelectorStrategy could not been found for Selector");
-        }
+        ResolvableType neededStrategyType = ResolvableType.forClassWithGenerics(SelectorStrategy.class, selector.getClass());
+        return allSelectorStrategies
+                .stream()
+                .filter(s -> neededStrategyType.isInstance(s))
+                .map(s -> (SelectorStrategy<T>)s)
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("SelectorStrategy<" + selector.getClass().getName() + "> could not been found"));
     }
 
     
