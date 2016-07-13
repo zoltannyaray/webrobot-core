@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class Lookup {
@@ -14,6 +16,7 @@ public class Lookup {
     @Id
     @GeneratedValue
     private Long id;
+    @Temporal(TemporalType.TIMESTAMP)
     private Date createdAt;
     @OneToOne
     private LookupDefinition lookupDefintion;

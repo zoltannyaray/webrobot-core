@@ -20,11 +20,9 @@ public class SelectorStrategyLocatorImpl implements SelectorStrategyLocator {
         return allSelectorStrategies
                 .stream()
                 .filter(s -> neededStrategyType.isInstance(s))
-                .map(s -> (SelectorStrategy<T>)s)
+                .map(s -> (SelectorStrategy<T>) s)
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("SelectorStrategy<" + selector.getClass().getName() + "> could not been found"));
     }
-
-    
 
 }

@@ -1,10 +1,14 @@
 package com.dayswideawake.webrobot.core.entity;
 
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 public class LookupDefinition {
@@ -17,6 +21,8 @@ public class LookupDefinition {
     @OneToOne(cascade=CascadeType.ALL)
     private Selector selector;
     private Long intervalSeconds;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastLookupAt;
 
     public LookupDefinition() {
     }
