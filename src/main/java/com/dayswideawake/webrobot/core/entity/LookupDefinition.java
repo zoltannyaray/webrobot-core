@@ -21,8 +21,7 @@ public class LookupDefinition {
     @OneToOne(cascade=CascadeType.ALL)
     private Selector selector;
     private Long intervalSeconds;
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastLookupAt;
+    private Long lastLookupAt;
 
     public LookupDefinition() {
     }
@@ -48,5 +47,15 @@ public class LookupDefinition {
     public Long getIntervalSeconds() {
         return intervalSeconds;
     }
+
+    public Long getLastLookupAt() {
+        return lastLookupAt;
+    }
+
+    public void setLastLookupAt(Long lastLookupAt) {
+        this.lastLookupAt = lastLookupAt;
+    }
+    
+    
 
 }

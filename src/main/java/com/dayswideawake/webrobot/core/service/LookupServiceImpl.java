@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.dayswideawake.webrobot.core.entity.Lookup;
 import com.dayswideawake.webrobot.core.entity.LookupDefinition;
 import com.dayswideawake.webrobot.core.repository.LookupRepository;
@@ -24,7 +25,7 @@ public class LookupServiceImpl implements LookupService {
     public Lookup doLookup(LookupDefinition lookupDefinition) {
         List<String> selectedContent = contentSelectorService.selectContent(lookupDefinition.getSite(), lookupDefinition.getSelector());
         Lookup lookup = new Lookup(lookupDefinition, selectedContent, new Date());
-        lookup = lookupRepository.save(lookup);
+//        lookup = lookupRepository.save(lookup);
         return lookup;
     }
 

@@ -29,7 +29,7 @@ public class LookupServiceImplTest extends AbstractTestNGSpringContextTests {
     }
     
     @Test
-    public void doLookupShouldSelectHungary(){
+    public void doLookupShouldSelectHeaderLogo(){
         Site site = new Site(new Location("http://index.hu"));
         CssSelector selector = new CssSelector(".index-header-wrapper .logo");
         LookupDefinition lookupDefinition = new LookupDefinition(site, selector, 10L);
