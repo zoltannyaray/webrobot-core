@@ -1,7 +1,6 @@
 package com.dayswideawake.webrobot.core.service;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
