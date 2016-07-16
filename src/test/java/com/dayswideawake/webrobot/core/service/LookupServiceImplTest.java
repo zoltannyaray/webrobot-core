@@ -20,15 +20,6 @@ public class LookupServiceImplTest extends AbstractTestNGSpringContextTests {
     private LookupServiceImpl lookupService;
     
     @Test
-    public void doLookupForBodyShouldReturnCorrectLookup(){
-        Site site = new Site(new Location("http://index.hu"));
-        CssSelector selector = new CssSelector("body");
-        LookupDefinition lookupDefinition = new LookupDefinition(site, selector, 10L);
-        Lookup lookup = lookupService.doLookup(lookupDefinition);
-        Assert.assertEquals(lookup.getSelectedContent().size(), 1);
-    }
-    
-    @Test
     public void doLookupShouldSelectHeaderLogo(){
         Site site = new Site(new Location("http://index.hu"));
         CssSelector selector = new CssSelector(".index-header-wrapper .logo");

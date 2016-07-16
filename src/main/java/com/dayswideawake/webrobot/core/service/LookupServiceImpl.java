@@ -25,7 +25,7 @@ public class LookupServiceImpl implements LookupService {
     public Lookup doLookup(LookupDefinition lookupDefinition) {
         List<String> selectedContent = contentSelectorService.selectContent(lookupDefinition.getSite(), lookupDefinition.getSelector());
         Lookup lookup = new Lookup(lookupDefinition, selectedContent, new Date());
-//        lookup = lookupRepository.save(lookup);
+        lookup = lookupRepository.save(lookup);
         return lookup;
     }
 

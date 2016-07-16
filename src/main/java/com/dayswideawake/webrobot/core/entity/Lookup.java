@@ -4,10 +4,12 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -23,6 +25,7 @@ public class Lookup {
     @OneToOne(cascade=CascadeType.ALL)
     private LookupDefinition lookupDefintion;
     @ElementCollection
+    @Column(length=3000)
     private List<String> selectedContent;
 
     public Lookup() {
