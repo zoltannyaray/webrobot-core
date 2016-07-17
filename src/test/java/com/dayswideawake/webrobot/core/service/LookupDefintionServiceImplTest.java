@@ -13,7 +13,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.dayswideawake.webrobot.core.config.AppConfig;
-import com.dayswideawake.webrobot.core.entity.CssSelector;
+import com.dayswideawake.webrobot.core.entity.SelectorCss;
 import com.dayswideawake.webrobot.core.entity.LookupDefinition;
 import com.dayswideawake.webrobot.core.entity.Site;
 import com.dayswideawake.webrobot.core.repository.LookupDefinitionRepository;
@@ -31,7 +31,7 @@ public class LookupDefintionServiceImplTest extends AbstractTestNGSpringContextT
     @Transactional
     public void getLookupDefintionsForScheduleShouldReturnCorrectNumberOfLookupDefintions(){
         for( int i = 0; i < 6; i++) {
-            LookupDefinition lookupDefinition = new LookupDefinition(new Site(), new CssSelector(), 35L);
+            LookupDefinition lookupDefinition = new LookupDefinition(new Site(), new SelectorCss(), 35L);
             Calendar lastLookupAt = Calendar.getInstance();
             lastLookupAt.add(Calendar.SECOND, -i * 10);
             lookupDefinition.setLastLookupAt(lastLookupAt.getTimeInMillis());

@@ -3,14 +3,14 @@ package com.dayswideawake.webrobot.core.entity;
 import javax.persistence.Entity;
 
 @Entity
-public class XPathSelector extends Selector {
+public class SelectorXPath extends Selector {
 
     private String xPathSelector;
 
-    public XPathSelector() {
+    public SelectorXPath() {
     }
 
-    public XPathSelector(String xPathSelector) {
+    public SelectorXPath(String xPathSelector) {
         this.xPathSelector = xPathSelector;
     }
 

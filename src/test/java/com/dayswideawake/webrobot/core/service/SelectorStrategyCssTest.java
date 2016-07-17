@@ -7,7 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.dayswideawake.webrobot.core.entity.CssSelector;
+import com.dayswideawake.webrobot.core.entity.SelectorCss;
 
 public class SelectorStrategyCssTest {
   
@@ -22,31 +22,31 @@ public class SelectorStrategyCssTest {
     
     @Test
     public void selectShouldSelectBody(){
-        List<String> selectedContent = selectorStrategyCss.select(content, new CssSelector("body"));
+        List<String> selectedContent = selectorStrategyCss.select(content, new SelectorCss("body"));
         Assert.assertEquals(selectedContent, Arrays.asList("<body><p id=\"id1\">Test</p><p class=\"class1\">Test 2</p></body>"));
     }
     
     @Test
     public void selectShouldSelectMultiplePs(){
-        List<String> selectedContent = selectorStrategyCss.select(content, new CssSelector("p"));
+        List<String> selectedContent = selectorStrategyCss.select(content, new SelectorCss("p"));
         Assert.assertEquals(selectedContent, Arrays.asList("<p id=\"id1\">Test</p>", "<p class=\"class1\">Test 2</p>"));
     }
     
     @Test
     public void selectShouldSelectByClass(){
-        List<String> selectedContent = selectorStrategyCss.select(content, new CssSelector(".class1"));
+        List<String> selectedContent = selectorStrategyCss.select(content, new SelectorCss(".class1"));
         Assert.assertEquals(selectedContent, Arrays.asList("<p class=\"class1\">Test 2</p>"));
     }
     
     @Test
     public void selectShouldSelectById(){
-        List<String> selectedContent = selectorStrategyCss.select(content, new CssSelector("#id1"));
+        List<String> selectedContent = selectorStrategyCss.select(content, new SelectorCss("#id1"));
         Assert.assertEquals(selectedContent, Arrays.asList("<p id=\"id1\">Test</p>"));
     }
     
     @Test
     public void selectShouldSelectByFollowing(){
-        List<String> selectedContent = selectorStrategyCss.select(content, new CssSelector("#id1 + .class1"));
+        List<String> selectedContent = selectorStrategyCss.select(content, new SelectorCss("#id1 + .class1"));
         Assert.assertEquals(selectedContent, Arrays.asList("<p class=\"class1\">Test 2</p>"));
     }
     

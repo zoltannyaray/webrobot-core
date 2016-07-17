@@ -13,7 +13,11 @@ public class ContentLoaderServiceImpl implements ContentLoaderService {
     public String loadContent(Site site) {
         String content = "";
         try {
-            content = Request.Get(site.getLocation().getUrl()).execute().returnContent().asString();
+            content = Request
+                    .Get(site.getLocation().getUrl().toString())
+                    .execute()
+                    .returnContent()
+                    .asString();
         } catch (ClientProtocolException e) {
             e.printStackTrace();
         } catch (IOException e) {

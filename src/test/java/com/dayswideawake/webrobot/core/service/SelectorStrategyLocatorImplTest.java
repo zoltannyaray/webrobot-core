@@ -7,8 +7,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.dayswideawake.webrobot.core.config.AppConfig;
-import com.dayswideawake.webrobot.core.entity.CssSelector;
-import com.dayswideawake.webrobot.core.entity.XPathSelector;
+import com.dayswideawake.webrobot.core.entity.SelectorCss;
+import com.dayswideawake.webrobot.core.entity.SelectorXPath;
 
 @ContextConfiguration(classes=AppConfig.class)
 public class SelectorStrategyLocatorImplTest extends AbstractTestNGSpringContextTests {
@@ -18,13 +18,13 @@ public class SelectorStrategyLocatorImplTest extends AbstractTestNGSpringContext
     
     @Test
     public void getSelectStrategyForShouldReturnCorrectStrategyForCssSelector(){
-        SelectorStrategy<CssSelector> selectorStrategy = selectorStrategyLocator.getSelectorStrategyFor(new CssSelector());
+        SelectorStrategy<SelectorCss> selectorStrategy = selectorStrategyLocator.getSelectorStrategyFor(new SelectorCss());
         Assert.assertEquals(selectorStrategy.getClass(), SelectorStrategyCss.class);
     }
     
     @Test
     public void getSelectStrategyForShouldReturnCorrectStrategyForXPathSelector(){
-        SelectorStrategy<XPathSelector> selectorStrategy = selectorStrategyLocator.getSelectorStrategyFor(new XPathSelector());
+        SelectorStrategy<SelectorXPath> selectorStrategy = selectorStrategyLocator.getSelectorStrategyFor(new SelectorXPath());
         Assert.assertEquals(selectorStrategy.getClass(), SelectorStrategyXPath.class);
     }
     

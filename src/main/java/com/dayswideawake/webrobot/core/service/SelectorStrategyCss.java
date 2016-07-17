@@ -9,13 +9,13 @@ import org.jsoup.nodes.Document.OutputSettings;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
-import com.dayswideawake.webrobot.core.entity.CssSelector;
+import com.dayswideawake.webrobot.core.entity.SelectorCss;
 
 @Service
-public class SelectorStrategyCss implements SelectorStrategy<CssSelector>{
+public class SelectorStrategyCss implements SelectorStrategy<SelectorCss>{
 
     @Override
-    public List<String> select(String content, CssSelector selector) {
+    public List<String> select(String content, SelectorCss selector) {
         Document document = Jsoup.parse(content);
         OutputSettings outputSettings = new OutputSettings();
         outputSettings.prettyPrint(false);

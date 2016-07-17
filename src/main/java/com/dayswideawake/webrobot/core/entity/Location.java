@@ -1,5 +1,7 @@
 package com.dayswideawake.webrobot.core.entity;
 
+import java.net.URL;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -11,18 +13,17 @@ public class Location {
     @GeneratedValue
     private Long id;
     private String name;
-    private String url;
+    private URL url;
 
     public Location() {
     }
 
-    public Location(String url) {
+    public Location(URL url) {
         super();
         this.url = url;
     }
 
-    public Location(String name, String url) {
-        super();
+    public Location(String name, URL url) {
         this.name = name;
         this.url = url;
     }
@@ -35,7 +36,7 @@ public class Location {
         return name;
     }
 
-    public String getUrl() {
+    public URL getUrl() {
         return url;
     }
 

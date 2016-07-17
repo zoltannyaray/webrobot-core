@@ -6,9 +6,9 @@ import org.mockito.MockitoAnnotations;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.dayswideawake.webrobot.core.entity.CssSelector;
+import com.dayswideawake.webrobot.core.entity.SelectorCss;
 import com.dayswideawake.webrobot.core.entity.Site;
-import com.dayswideawake.webrobot.core.entity.XPathSelector;
+import com.dayswideawake.webrobot.core.entity.SelectorXPath;
 
 public class ContentSelectorServiceImplTest {
   
@@ -29,14 +29,14 @@ public class ContentSelectorServiceImplTest {
     public void init(){
         MockitoAnnotations.initMocks(this);
         Mockito.when(contentLoaderService.loadContent(Mockito.any(Site.class))).thenReturn(content);
-        Mockito.when(selectorStrategyLocator.getSelectorStrategyFor(Mockito.isA(CssSelector.class))).thenReturn(selectorStrategyCss);
-        Mockito.when(selectorStrategyLocator.getSelectorStrategyFor(Mockito.isA(XPathSelector.class))).thenReturn(selectorStrategyXPath);
+        Mockito.when(selectorStrategyLocator.getSelectorStrategyFor(Mockito.isA(SelectorCss.class))).thenReturn(selectorStrategyCss);
+        Mockito.when(selectorStrategyLocator.getSelectorStrategyFor(Mockito.isA(SelectorXPath.class))).thenReturn(selectorStrategyXPath);
         service = new ContentSelectorServiceImpl(contentLoaderService, selectorStrategyLocator);
     }
     
     @Test
     public void selectContentShouldUseCssSelectorStrategy(){
-        CssSelector selector = new CssSelector("test selector");
+        SelectorCss selector = new SelectorCss("test selector");
         service.selectContent(site, selector);
         Mockito.verify(selectorStrategyCss, Mockito.times(1)).select(content, selector);
         Mockito.verify(selectorStrategyXPath, Mockito.never()).select(Mockito.any(), Mockito.any());
@@ -44,7 +44,7 @@ public class ContentSelectorServiceImplTest {
     
     @Test
     public void selectContentShouldUseXPathSelectorStrategy(){
-        XPathSelector selector = new XPathSelector("test selector");
+        SelectorXPath selector = new SelectorXPath("test selector");
         service.selectContent(site, selector);
         Mockito.verify(selectorStrategyXPath, Mockito.times(1)).select(content, selector);
         Mockito.verify(selectorStrategyCss, Mockito.never()).select(Mockito.any(), Mockito.any());

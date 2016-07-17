@@ -1,5 +1,7 @@
 package com.dayswideawake.webrobot.core.repository;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +25,8 @@ public class LocationRepositoryTest extends AbstractTestNGSpringContextTests {
     
     @Test
     @Transactional
-    public void locationShouldBeCreated() {
-        Location location = new Location("Test location", "http://example.com");
+    public void locationShouldBeCreated() throws MalformedURLException {
+        Location location = new Location("Test location", new URL("http://example.com"));
         repository.save(location);
         Iterable<Location> locations = repository.findAll();
         Stream<Location> locationStream = StreamSupport.stream(locations.spliterator(), false);

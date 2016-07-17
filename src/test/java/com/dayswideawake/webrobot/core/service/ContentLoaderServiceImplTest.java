@@ -1,5 +1,8 @@
 package com.dayswideawake.webrobot.core.service;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -17,8 +20,8 @@ public class ContentLoaderServiceImplTest {
     }
     
     @Test
-    public void loadContentShouldLoadHtml(){
-        Site site = new Site(new Location("http://index.hu"));
+    public void loadContentShouldLoadHtml() throws MalformedURLException{
+        Site site = new Site(new Location(new URL("http://index.hu")));
         String content = service.loadContent(site);
         Assert.assertNotNull(content);
         Assert.assertNotEquals(content, "");

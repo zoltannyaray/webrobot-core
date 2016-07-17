@@ -1,5 +1,8 @@
 package com.dayswideawake.webrobot.core.repository;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -9,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import com.dayswideawake.webrobot.core.config.AppConfig;
-import com.dayswideawake.webrobot.core.entity.CssSelector;
+import com.dayswideawake.webrobot.core.entity.SelectorCss;
 import com.dayswideawake.webrobot.core.entity.Location;
 import com.dayswideawake.webrobot.core.entity.LookupDefinition;
 import com.dayswideawake.webrobot.core.entity.Selector;
@@ -24,10 +27,10 @@ public class LookupDefinitionRepositoryTest extends AbstractTestNGSpringContextT
     
     @Test
     @Transactional
-    public void entityShouldBeSaved(){
-        Location location = new Location("Test location", "http://example.com");
+    public void entityShouldBeSaved() throws MalformedURLException{
+        Location location = new Location("Test location", new URL("http://example.com"));
         Site site = new Site("Test site", location);
-        Selector selector = new CssSelector("body");
+        Selector selector = new SelectorCss("body");
         LookupDefinition lookupDefinition = new LookupDefinition(site, selector, 10L);
         lookupDefinition = repository.save(lookupDefinition);
         Assert.assertNotNull(lookupDefinition.getId());

@@ -3,14 +3,14 @@ package com.dayswideawake.webrobot.core.entity;
 import javax.persistence.Entity;
 
 @Entity
-public class CssSelector extends Selector {
+public class SelectorCss extends Selector {
 
     private String cssSelector;
 
-    public CssSelector() {
+    public SelectorCss() {
     }
 
-    public CssSelector(String cssSelector) {
+    public SelectorCss(String cssSelector) {
         this.cssSelector = cssSelector;
     }
 
