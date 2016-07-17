@@ -1,10 +1,12 @@
 package com.dayswideawake.webrobot.core.service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.dayswideawake.webrobot.core.entity.LookupDefinition;
@@ -27,10 +29,11 @@ public class LookupDefintionServiceImpl implements LookupDefintionService {
         QLookupDefinition lookupDefinition = QLookupDefinition.lookupDefinition;
         Long currentTimeStamp = new Date().getTime();
         BooleanExpression lastLookupWasMoreThanIntervalSecondsAgo = lookupDefinition.lastLookupAt.add(lookupDefinition.intervalSeconds.multiply(1000)).goe(currentTimeStamp);
-        Iterable<LookupDefinition> lookupDefinitions = lookupDefinitionRepository.findAll(lastLookupWasMoreThanIntervalSecondsAgo);
-        List<LookupDefinition> result = new ArrayList<>();
-        lookupDefinitions.forEach(result::add);
-        return result;
+        PageRequest page =  new PageRequest(0, maxNumberOfLookupDefintions);
+        Iterable<LookupDefinition> lookupDefinitions = lookupDefinitionRepository.findAll(lastLookupWasMoreThanIntervalSecondsAgo, page);
+        return StreamSupport
+                .stream(lookupDefinitions.spliterator(), false)
+                .collect(Collectors.toList());
     }
 
 }

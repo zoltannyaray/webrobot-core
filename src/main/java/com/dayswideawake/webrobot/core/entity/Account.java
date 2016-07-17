@@ -1,9 +1,12 @@
 package com.dayswideawake.webrobot.core.entity;
 
+import java.util.List;
+
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 import com.dayswideawake.webrobot.core.domain.model.EmailAddress;
 import com.dayswideawake.webrobot.core.domain.model.HashedPassword;
@@ -18,6 +21,8 @@ public class Account {
     private EmailAddress emailAddress;
     @Convert(converter=HashedPasswordConverter.class)
     private HashedPassword password;
+    @OneToMany
+    private List<NotificationTarget> notificationTargets;
 
     public Account() {
     }
