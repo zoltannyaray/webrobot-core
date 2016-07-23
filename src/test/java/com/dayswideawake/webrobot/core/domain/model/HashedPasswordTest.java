@@ -3,6 +3,8 @@ package com.dayswideawake.webrobot.core.domain.model;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.dayswideawake.webrobot.core.model.HashedPassword;
+
 public class HashedPasswordTest {
   
     @Test

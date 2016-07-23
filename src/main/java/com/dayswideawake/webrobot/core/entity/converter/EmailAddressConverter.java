@@ -3,7 +3,7 @@ package com.dayswideawake.webrobot.core.entity.converter;
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 
-import com.dayswideawake.webrobot.core.domain.model.EmailAddress;
+import com.dayswideawake.webrobot.core.model.EmailAddress;
 
 @Converter(autoApply=true)
 public class EmailAddressConverter implements AttributeConverter<EmailAddress, String>{

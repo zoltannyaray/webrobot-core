@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.dayswideawake.webrobot.core.entity.Lookup;
 
 @Repository
-public interface LookupRepository extends JpaRepository<Lookup, Long>/*, QueryDslPredicateExecutor<Lookup>*/ {
+public interface LookupRepository extends JpaRepository<Lookup, Long>, QueryDslPredicateExecutor<Lookup> {
 
     
     

@@ -1,10 +1,10 @@
-package com.dayswideawake.webrobot.core.domain.model;
+package com.dayswideawake.webrobot.core.model;
 
-public class PlainPassword {
+public class HashedPassword {
 
     private String value;
 
-    public PlainPassword(String value) {
+    public HashedPassword(String value) {
         if (value == null) {
             throw new IllegalArgumentException("value should not be null");
         }
@@ -27,12 +27,12 @@ public class PlainPassword {
         if (obj == this) {
             result = true;
         } else if (obj != null && getClass() == obj.getClass()) {
-            PlainPassword plainPassword = (PlainPassword) obj;
-            if (value.equals(plainPassword.value)) {
+            HashedPassword hashedPassword = (HashedPassword) obj;
+            if (value.equals(hashedPassword.value)) {
                 result = true;
             }
         }
         return result;
     }
-
+    
 }

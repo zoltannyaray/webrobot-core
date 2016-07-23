@@ -2,7 +2,7 @@ package com.dayswideawake.webrobot.core.entity;
 
 import javax.persistence.Entity;
 
-import com.dayswideawake.webrobot.core.domain.model.EmailAddress;
+import com.dayswideawake.webrobot.core.model.EmailAddress;
 
 @Entity
 public class NotificationTargetEmailAddress extends NotificationTarget {

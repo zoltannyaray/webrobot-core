@@ -8,9 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import com.dayswideawake.webrobot.core.domain.model.EmailAddress;
-import com.dayswideawake.webrobot.core.domain.model.HashedPassword;
 import com.dayswideawake.webrobot.core.entity.converter.HashedPasswordConverter;
+import com.dayswideawake.webrobot.core.model.EmailAddress;
+import com.dayswideawake.webrobot.core.model.HashedPassword;
 
 @Entity
 public class Account {

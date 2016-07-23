@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import com.dayswideawake.webrobot.core.entity.Location;
 
 @Repository
-public interface LocationRepository extends JpaRepository<Location, Long>/*, QueryDslPredicateExecutor<Location>*/ {
+public interface LocationRepository extends JpaRepository<Location, Long>, QueryDslPredicateExecutor<Location> {
 
 }

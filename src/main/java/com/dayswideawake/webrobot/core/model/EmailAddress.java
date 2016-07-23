@@ -1,4 +1,4 @@
-package com.dayswideawake.webrobot.core.domain.model;
+package com.dayswideawake.webrobot.core.model;
 
 public class EmailAddress {
 
