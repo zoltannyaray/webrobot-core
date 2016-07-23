@@ -4,7 +4,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
@@ -12,13 +12,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.dayswideawake.webrobot.core.config.AppConfig;
-import com.dayswideawake.webrobot.core.entity.SelectorCss;
+import com.dayswideawake.webrobot.core.Application;
 import com.dayswideawake.webrobot.core.entity.LookupDefinition;
+import com.dayswideawake.webrobot.core.entity.SelectorCss;
 import com.dayswideawake.webrobot.core.entity.Site;
 import com.dayswideawake.webrobot.core.repository.LookupDefinitionRepository;
 
-@ContextConfiguration(classes=AppConfig.class)
+@SpringApplicationConfiguration(Application.class)
 @TestExecutionListeners({TransactionalTestExecutionListener.class})
 public class LookupDefintionServiceImplTest extends AbstractTestNGSpringContextTests {
     

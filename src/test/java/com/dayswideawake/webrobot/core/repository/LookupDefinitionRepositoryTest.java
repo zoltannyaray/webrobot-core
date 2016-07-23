@@ -4,6 +4,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -11,14 +12,15 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import com.dayswideawake.webrobot.core.config.AppConfig;
+//import com.dayswideawake.webrobot.core.config.AppConfig;
 import com.dayswideawake.webrobot.core.entity.SelectorCss;
+import com.dayswideawake.webrobot.core.Application;
 import com.dayswideawake.webrobot.core.entity.Location;
 import com.dayswideawake.webrobot.core.entity.LookupDefinition;
 import com.dayswideawake.webrobot.core.entity.Selector;
 import com.dayswideawake.webrobot.core.entity.Site;
 
-@ContextConfiguration(classes=AppConfig.class)
+@SpringApplicationConfiguration(Application.class)
 @TestExecutionListeners({TransactionalTestExecutionListener.class})
 public class LookupDefinitionRepositoryTest extends AbstractTestNGSpringContextTests {
   

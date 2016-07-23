@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.dayswideawake.webrobot.core.entity.LookupDefinition;
 import com.dayswideawake.webrobot.core.entity.QLookupDefinition;
 import com.dayswideawake.webrobot.core.repository.LookupDefinitionRepository;
-import com.querydsl.core.types.dsl.BooleanExpression;
+import com.mysema.query.types.expr.BooleanExpression;
 
 @Service
 public class LookupDefintionServiceImpl implements LookupDefintionService {

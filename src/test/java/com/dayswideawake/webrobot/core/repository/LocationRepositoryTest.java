@@ -4,7 +4,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
+
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
@@ -13,11 +17,13 @@ import org.springframework.transaction.annotation.Transactional;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.dayswideawake.webrobot.core.config.AppConfig;
+import com.dayswideawake.webrobot.core.Application;
+//import com.dayswideawake.webrobot.core.config.AppConfig;
 import com.dayswideawake.webrobot.core.entity.Location;
 
-@ContextConfiguration(classes=AppConfig.class)
+//@ContextConfiguration(classes=AppConfig.class)
 @TestExecutionListeners({TransactionalTestExecutionListener.class})
+@SpringApplicationConfiguration(Application.class)
 public class LocationRepositoryTest extends AbstractTestNGSpringContextTests {
   
     @Autowired
